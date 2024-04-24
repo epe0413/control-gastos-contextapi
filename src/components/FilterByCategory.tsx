@@ -17,7 +17,7 @@ export default function FilterByCategory() {
                     <label htmlFor="category">Filtrar Gastos</label>
                     <select
                         id="category"
-                        className="bg-slate-100 p-3 flex-1 rounded"
+                        className="p-1.5 rounded-md border-0 focus:ring-indigo-600 text-gray-900 ring-1 ring-inset ring-gray-300 flex-1"
                         onChange={handleChange}
                     >
                         <option value="">-- Todas las categorias --</option>

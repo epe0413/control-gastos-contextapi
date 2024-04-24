@@ -15,7 +15,7 @@ export default function ExpenseForm() {
         category: '',
         date: new Date(),
     })
-    const [error, setError] = useState('');
+    // const [error, setError] = useState('');
     const [previousAmount, setPreviousAmount] = useState(0);
     const { dispatch, state, remainingBudget } = useBudget();
 
@@ -51,13 +51,15 @@ export default function ExpenseForm() {
 
         // Validar
         if(Object.values(expense).includes('')){
-            setError('Todos los campos son obligatorios')
+            dispatch({type:'add-error', payload: {error: 'Todos los campos son obligatorios'}})
+            // state.error='Todos los campos son obligatorios'
             return
         }
 
         // Validar no pasarme del limite
         if( (expense.amount - previousAmount ) > remainingBudget ){
-            setError('Ese gasto se sale del preupuesto')
+            dispatch({type:'add-error', payload: {error: 'Ese gasto se sale del preupuesto'}})
+            // state.error='Ese gasto se sale del preupuesto'
             return
         }
         // Agregar o actualizar un nuevo gasto
@@ -82,13 +84,13 @@ export default function ExpenseForm() {
             onSubmit={handleSubmit}
         >
             <legend
-                className="text-center text-2xl font-black border-b-4 border-blue-500 py-1"
+                className="text-center text-2xl font-black border-b-4 border-blue-800 py-1"
             >
                 {state.editingId ? 'Editar Gasto' : 'Nuevo Gasto'}
                 {/* Nuevo Gasto */}
             </legend>
 
-            {error && <ErrorMessage>{error}</ErrorMessage>}
+            {state.error && <ErrorMessage>{state.error}</ErrorMessage>}
             <div className="flex flex-col gap-2">
                 <label
                     htmlFor="expenseName"
@@ -155,13 +157,14 @@ export default function ExpenseForm() {
                 {/* <input
                     type="date"
                     id="amount"
-                    className="bg-slate-100 p-2 rounded-md"
+                    className="p-1.5 rounded-md border-0 focus:ring-indigo-600 text-gray-900 ring-1 ring-inset ring-gray-300"
                     name="amount"
+                    value={expense.date}
                 /> */}
             </div>
             <input
                 type="submit"
-                className="bg-blue-600 cursor-pointer w-full p-2 text-white font-bold rounded-lg"
+                className="bg-blue-800 hover:bg-blue-900 cursor-pointer w-full p-2 text-white font-bold rounded-lg"
                 // value="Registrar Gasto"
                 value={state.editingId ? 'Guardar Cambios' : 'Registrar Gasto'}
             />

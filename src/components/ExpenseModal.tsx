@@ -15,7 +15,7 @@ return (
                 type="button"
                 onClick={() => dispatch({type: 'show-modal'})}
             >
-            <PlusCircleIcon className='w-16 h-16 text-blue-600 rounded-full' />
+            <PlusCircleIcon className='w-16 h-16 text-blue-950 rounded-full' />
             </button>
         </div>
 

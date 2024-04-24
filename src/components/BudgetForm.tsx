@@ -1,9 +1,11 @@
 import { ChangeEvent, FormEvent, useMemo, useState } from "react"
 import { useBudget } from "../hooks/useBudget";
+import ErrorMessage from "./ErrorMessage";
+import { formatCurrency } from "../helpers";
 
 export default function BudgetForm() {
     const [budget, setBudget] = useState(0)
-    const { dispatch } = useBudget()
+    const { dispatch, totalExpense, state } = useBudget()
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setBudget(e.target.valueAsNumber);
@@ -16,7 +18,14 @@ export default function BudgetForm() {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        if( totalExpense > budget ){
+            dispatch({type:'add-error', payload: {error:  `El presupuesto no puede ser menor a lo gastado: ${formatCurrency(totalExpense)}`}})
+            // state.error='Ese gasto se sale del preupuesto'
+            return
+        }
+
         dispatch({type: 'add-budget', payload: { budget } })
+        dispatch({type: 'close-budget'})
     }
 
     return (
@@ -25,10 +34,13 @@ export default function BudgetForm() {
             onSubmit = {handleSubmit}
         >
             <div className="flex flex-col space-y-5">
-                <label htmlFor="budget" className="text-2xl text-blue-600 font-bold text-center">
+                <label htmlFor="budget" className="text-2xl text-blue-900 font-bold text-center">
                     Definir Presupuesto
                 </label>
             </div>
+
+            {state.error && <ErrorMessage>{state.error}</ErrorMessage>}
+
             <input
                 id="budget"
                 type="number"
@@ -38,12 +50,15 @@ export default function BudgetForm() {
                 value={budget}
                 onChange={handleChange}
             />
-            <input
-                type="submit"
-                value='Definir Presupuesto'
-                className="bg-blue-600 hover:bg-blue-700 cursor-pointer w-full p-2 text-white font-black rounded-md disabled:opacity-40"
-                disabled={isValid}
-            />
+            <div className="flex place-content-center">
+
+                <input
+                    type="submit"
+                    value='Definir Presupuesto'
+                    className="bg-blue-800 hover:bg-blue-900 cursor-pointer p-2 text-white font-black rounded-md disabled:opacity-40 disabled:cursor-auto disabled:hover:bg-blue-800"
+                    disabled={isValid}
+                />
+            </div>
         </form>
     )
 }

@@ -5,7 +5,7 @@ import 'react-circular-progressbar/dist/styles.css'
 
 export default function BudgetTracker() {
 
-    const {state, totalExpense, remainingBudget, dispatch} = useBudget();
+    const {state, totalExpense, remainingBudget} = useBudget();
 
     const percentage = +((totalExpense / state.budget) * 100).toFixed(2);
 
@@ -15,22 +15,15 @@ export default function BudgetTracker() {
                 <CircularProgressbar
                     value={percentage}
                     styles={buildStyles({
-                        pathColor: percentage === 100 ? '#DC2626' :'#3B82F6',
+                        pathColor: percentage === 100 ? '#DC2626' :'rgb(23 37 84 / var(--tw-bg-opacity))',
                         trailColor: '#F5F5F5',
                         textSize: 9,
-                        textColor: percentage === 100 ? '#DC2626' :'#3B82F6',
+                        textColor: percentage === 100 ? '#DC2626' :'rgb(23 37 84 / var(--tw-bg-opacity))',
                     })}
                     text={`${percentage}% Gastado`}
                 />
             </div>
             <div className="flex flex-col justify-center items-center gap-8">
-                <button
-                    type="button"
-                    className="bg-pink-600 w-full p-2 text-white font-bold rounded-lg"
-                    onClick={() => dispatch({type: 'reset-app'})}
-                >
-                    Resetear App
-                </button>
 
                 <AmountDisplay
                     label="Presupuesto"

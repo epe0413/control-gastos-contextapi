@@ -10,7 +10,10 @@ export type BudgetActions =
     { type: 'get-expense-by-id', payload: {id: Expense['id']} } |
     { type: 'update-expense', payload: {expense: Expense} } |
     { type: 'reset-app' } |
-    { type: 'add-filter-category', payload: {id: Category['id']}}
+    { type: 'add-filter-category', payload: {id: Category['id']}} |
+    { type: 'show-budget'} |
+    { type: 'close-budget'} |
+    { type: 'add-error', payload: {error: string}}
 
 export type BudgetState = {
     budget: number
@@ -18,6 +21,8 @@ export type BudgetState = {
     expenses: Expense[]
     editingId: Expense['id']
     currentCategory: Category['id']
+    budgetE: boolean
+    error: string
 }
 
 const initialBudget = () : number => {
@@ -35,7 +40,9 @@ export const initialState : BudgetState = {
     modal: false,
     expenses: localStorageExpenses(),
     editingId: '',
-    currentCategory: ''
+    currentCategory: '',
+    budgetE: false,
+    error: ''
 }
 
 const createExpense = (draftExpense: DraftExpense) : Expense => {
@@ -52,20 +59,23 @@ export const budgetReducer = (
     if(action.type === 'add-budget') {
         return {
             ...state,
-            budget: action.payload.budget
+            budget: action.payload.budget,
+            error:''
         }
     }
     if(action.type === 'show-modal') {
         return {
             ...state,
-            modal: true
+            modal: true,
+            budgetE: false
         }
     }
     if(action.type === 'close-modal') {
         return {
             ...state,
             modal: false,
-            editingId: ''
+            editingId: '',
+            error: ''
         }
     }
     if(action.type === 'add-expense') {
@@ -110,6 +120,24 @@ export const budgetReducer = (
         return{
             ...state,
             currentCategory: action.payload.id
+        }
+    }
+    if(action.type === 'show-budget'){
+        return {
+            ...state,
+            budgetE: true
+        }
+    }
+    if(action.type === 'close-budget'){
+        return {
+            ...state,
+            budgetE: false
+        }
+    }
+    if(action.type === 'add-error') {
+        return{
+            ...state,
+            error: action.payload.error
         }
     }
 

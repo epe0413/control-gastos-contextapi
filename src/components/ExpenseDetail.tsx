@@ -55,11 +55,11 @@ export default function ExpenseDetail({expense}: ExpenseDetailProps) {
                         <img 
                             src={`/icono_${categoryInfo.icon}.svg`}
                             alt="icono-gasto"
-                            className="w-20"
+                            className=" w-16"
                         />
 
                     </div>
-                    <div className="flex-1 space-y-2">
+                    <div className="flex-1 space-y-1">
                         <p className="text-sm font-bold text-slate-500">{categoryInfo.name}</p>
                         <p>{expense.expenseName}</p>
                         <p className="text-slate-600 text-sm">{formatDate(expense.date!.toString())}</p>
