@@ -4,6 +4,7 @@ import { useBudget } from './hooks/useBudget';
 import BudgetTracker from './components/BudgetTracker';
 import ExpenseModal from './components/ExpenseModal';
 import ExpenseList from './components/ExpenseList';
+import FilterByCategory from './components/FilterByCategory';
 
 function App() {
 
@@ -17,19 +18,21 @@ function App() {
 
   return (
     <>
-      <header className="bg-blue-600 py-3 max-h-72">
+      <header className="bg-blue-950 py-3 max-h-72 shadow-xl">
         <h1 className="text-center font-black text-2xl text-white">
           Planificador de Gastos
         </h1>
+        
       </header>
 
-      <div className=" max-w-3xl mx-auto bg-white shadow-lg rounded-lg mt-7 p-7">
+      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg mt-7 p-7">
         {isValidBudget ? <BudgetTracker/>: <BudgetForm/>}
       </div>
 
       {isValidBudget && (
-        <main className='max-w-3xl mx-auto py10'>
+        <main className='max-w-3xl mx-auto py-10'>
           <ExpenseModal/>
+          <FilterByCategory/>
           <ExpenseList/>
         </main>
       )}

@@ -92,13 +92,13 @@ export default function ExpenseForm() {
             <div className="flex flex-col gap-2">
                 <label
                     htmlFor="expenseName"
-                    className="text-lg"
+                    // className="text-md"
                 >Nombre Gasto:</label>
                 <input
                     type="text"
                     id="expenseName"
                     placeholder="Añade el Nombre del Gasto"
-                    className="bg-slate-100 p-2 rounded-md"
+                    className="p-1.5 rounded-md border-0 focus:ring-indigo-600 text-gray-900 ring-1 ring-inset ring-gray-300"
                     name="expenseName"
                     value= {expense.expenseName}
                     onChange={handleChange}
@@ -107,13 +107,13 @@ export default function ExpenseForm() {
             <div className="flex flex-col gap-2">
                 <label
                     htmlFor="amount"
-                    className="text-lg"
+                    // className="text-md"
                 >Cantidad:</label>
                 <input
                     type="number"
                     id="amount"
                     placeholder="Añade la cantidad del gasto: ej. 300"
-                    className="bg-slate-100 p-2 rounded-md"
+                    className="p-1.5 rounded-md border-0 focus:ring-indigo-600 text-gray-900 ring-1 ring-inset ring-gray-300"
                     name="amount"
                     value={expense.amount}
                     onChange={handleChange}
@@ -122,11 +122,11 @@ export default function ExpenseForm() {
             <div className="flex flex-col gap-2">
                 <label
                     htmlFor="category"
-                    className="text-lg"
+                    // className="text-md"
                 >Categoria:</label>
                 <select
                     id="category"
-                    className="bg-slate-100 p-2 rounded-md"
+                    className="p-1.5 rounded-md border-0 focus:ring-indigo-600 text-gray-900 ring-1 ring-inset ring-gray-300"
                     name="category"
                     value={expense.category}
                     onChange={handleChange}
@@ -145,10 +145,10 @@ export default function ExpenseForm() {
             <div className="flex flex-col gap-2">
                 <label
                     htmlFor="date"
-                    className="text-lg"
+                    // className="text-md"
                 >Fecha Gasto:</label>
                 <DatePicker
-                    className="bg-slate-100 p-2 border-0"
+                    className="p-1.5 rounded-md border-0 focus:ring-indigo-600 text-gray-900 ring-1 ring-inset ring-gray-300"
                     value={expense.date}
                     onChange={handleChangeDate}
                 />
