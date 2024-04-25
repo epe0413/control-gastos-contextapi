@@ -16,3 +16,8 @@ export type Category ={
     name: string
     icon: string
 }
+
+export type Budget = {
+    name: string,
+    budget: number,
+}
